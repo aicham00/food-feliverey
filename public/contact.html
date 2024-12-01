@@ -6,6 +6,11 @@
   <meta name="keywords" content="مطاعم الجزائر, سجل مشروعك, مطاعم بوسعادة, مشاريع صغيرة, توصيل الطعام">
   <meta name="description" content="سجل مشروعك الآن على موقع مشاريعي واحصل على فرصة لإبراز مشروعك أو مطعمك في الجزائر.">
   <title>اتصل بنا</title>
+
+  <!-- Firebase App (تحميل Firebase) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -84,6 +89,58 @@
       <button type="submit">إرسال</button>
     </form>
   </div>
+  
+  <script>
+    // إعداد Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAYUxxxxx",
+      authDomain: "projects-161ea.firebaseapp.com",
+      projectId: "projects-161ea",
+      storageBucket: "projects-161ea.firebasestorage.app",
+      messagingSenderId: "41702348956",
+      appId: "1:41702348956:web:9e5e36a619a91699a77559",
+      measurementId: "G-S9FG4K7L4N"
+    };
+
+    // تهيئة Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // جلب وعرض قائمة الرسائل من Firestore
+    async function fetchContact() {
+      const contactList = document.getElementById("contact-list");
+      contactList.innerHTML = "<h2>قائمةالرسائل</h2>"; // إعادة تعيين المحتوى
+
+      try {
+        const querySnapshot = await db.collection("deliveries").get();
+        if (querySnapshot.empty) {
+          deliveryList.innerHTML += "<p>لا توجد رسائل متاحة حالياً.</p>";
+          return;
+        }
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const deliveryItem = document.createElement("div");
+          deliveryItem.className = "delivery-item";
+
+          // عرض بيانات كل الرسائل
+          deliveryItem.innerHTML = `
+            <h3>الاسم:${data.name}</h3>
+            <p><strong>البريد الالكتروني:</strong> ${data.phone}</p>
+            <p><strong>الرسالة:</strong> ${data.vehicle}</p>
+          `;
+          
+          deliveryList.appendChild(deliveryItem);
+        });
+      } catch (error) {
+        console.error("خطأ في جلب البيانات:", error);
+        deliveryList.innerHTML += "<p>حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة لاحقًا.</p>";
+      }
+    }
+
+    // جلب القائمة عند تحميل الصفحة
+    window.addEventListener("load", fetchDeliveries);
+  </script>
   <footer style="text-align: center; margin-top: 40px; padding: 20px; background-color: #ffcccb;">
     <p>&copy; 2024 جميع الحقوق محفوظة - مطعمي</p>
   </footer>

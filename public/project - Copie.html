@@ -110,16 +110,17 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyA5gxxxxx",
-            authDomain: "myrestaurantweb-76490.firebaseapp.com",
-            projectId: "myrestaurantweb-76490",
-            storageBucket: "myrestaurantweb-76490.appspot.com",
-            messagingSenderId: "69790876289",
-            appId: "1:69790876289:web:c954a24ddc8d66b0f86c28",
-            measurementId: "G-9XEPX3NZ8G"
-        };
+        
+     // إعداد Firebase
+     const firebaseConfig = {
+       apiKey: "AIzaSyA5xxxxx",
+       authDomain: "myrestaurantweb-76490.firebaseapp.com",
+       projectId: "myrestaurantweb-76490",
+       storageBucket: "myrestaurantweb-76490.firebasestorage.app",
+       messagingSenderId: "697969807289",
+       appId: "1:697969807289:web:c95424d4c68db660ecb068",
+       measurementId: "G-0XPEK3GZNB"
+     };
 
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
